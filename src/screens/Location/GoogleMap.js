@@ -5,10 +5,14 @@ import {
   View,
   Dimensions,
   Alert,
+  Platform,
+  PermissionsAndroid,
   TouchableOpacity,
 } from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import * as Location from 'expo-location';
+// import * as Location from 'expo-location';
+// import RNLocation from 'react-native-location';
+import Geolocation from '@react-native-community/geolocation';
 import {Icon} from 'native-base';
 import CurrentLocationButton from './CurrentLocationButton';
 
@@ -30,21 +34,77 @@ export default class GoogleMap extends Component {
   //     longitude: location.coords.longitude,
   //   });
   // }
+  getOneTimeLocation = () => {
+    Geolocation.getCurrentPosition(
+      (position) => {
+        const currentLongitude = JSON.stringify(position.coords.longitude);
+        const currentLatitude = JSON.stringify(position.coords.latitude);
+        const dataCord = {
+          longitude: currentLongitude,
+          latitude: currentLatitude,
+        };
+        this.setState({dataCord});
+      },
+      (error) => {
+        console.log(error.message);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 30000,
+        maximumAge: 1000,
+      },
+    );
+  };
 
-  async componentDidMount() {
-    try {
-      let {status} = await Location.requestPermissionsAsync();
-      if (status !== 'granted') {
-        return;
+  subscribeLocationLocation = () => {
+    watchID = Geolocation.watchPosition(
+      (position) => {
+        //Will give you the location on location change
+
+        console.log(position);
+
+        //getting the Longitude from the location json
+        const currentLongitude = JSON.stringify(position.coords.longitude);
+
+        //getting the Latitude from the location json
+        const currentLatitude = JSON.stringify(position.coords.latitude);
+      },
+      (error) => {
+        console.log(error.message);
+      },
+      {
+        enableHighAccuracy: false,
+        maximumAge: 1000,
+      },
+    );
+  };
+
+  componentDidMount() {
+    const requestLocationPermission = async () => {
+      if (Platform.OS === 'ios') {
+        this.getOneTimeLocation();
+        this.subscribeLocationLocation();
+      } else {
+        try {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            {
+              title: 'Location Access Required',
+              message: 'This App needs to Access your location',
+            },
+          );
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            //To Check, If Permission is granted
+            this.getOneTimeLocation();
+          } else {
+            alert('Permission Denied');
+          }
+        } catch (err) {
+          console.warn(err);
+        }
       }
-      let location = await Location.getCurrentPositionAsync({
-        accuracy: Location.Accuracy.High,
-      });
-      this.updateState(location);
-    } catch (error) {
-      console.log(error);
-    }
-    this.forceUpdate();
+    };
+    requestLocationPermission();
   }
 
   updateState = async (location) => {
@@ -56,21 +116,21 @@ export default class GoogleMap extends Component {
     };
     this.setState({region});
 
-    try {
-      let location = await Location.geocodeAsync('JCCI GLORY TABERNACLE');
+    // try {
+    //   // let loocation = await Location.geocodeAsync('JCCI GLORY TABERNACLE');
 
-      location.map((item) => {
-        let dataCord = {
-          latitude: item.latitude,
-          longitude: item.longitude,
-        };
-        this.setState({dataCord});
-      });
+    //   loocation.map((item) => {
+    //     let dataCord = {
+    //       latitude: item.latitude,
+    //       longitude: item.longitude,
+    //     };
+    //     this.setState({dataCord});
+    //   });
 
-      console.log(this.state.dataCord.latitude);
-    } catch (error) {
-      console.log(error);
-    }
+    //   console.log(this.state.dataCord.latitude);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   centerMap = () => {
@@ -92,13 +152,8 @@ export default class GoogleMap extends Component {
   render() {
     return (
       <View style={styles.mapView}>
-        <CurrentLocationButton
-          open={this.props.side}
-          cb={() => {
-            this.centerMap();
-          }}
-        />
-        <MapView
+        <CurrentLocationButton open={this.props.side} />
+        {/* <MapView
           // showsUserLocation
           initialRegion={this.state.region}
           // showsMyLocationButton
@@ -126,7 +181,7 @@ export default class GoogleMap extends Component {
               description={'description'}
             />
           )}
-        </MapView>
+        </MapView> */}
       </View>
     );
   }

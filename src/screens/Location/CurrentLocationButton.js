@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Dimensions, Alert} from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import * as Location from 'expo-location';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
