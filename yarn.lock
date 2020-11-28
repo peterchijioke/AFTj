@@ -5857,6 +5857,11 @@ react-native-easy-grid@0.2.2:
   dependencies:
     lodash "^4.17.15"
 
+react-native-geolocation-service@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-geolocation-service/-/react-native-geolocation-service-5.1.0.tgz#53232c169cbb485d4b7e1b254f83f199073a7815"
+  integrity sha512-XAqzWi1x4TIgyBWANmyCLo/xddVjRib7+dIYHdCtJjsPagTTk10YX2mnW71t1qQ5ntt2MldBklR0o34LUU+Cfw==
+
 react-native-gesture-handler@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.9.0.tgz#e441b1c0277c3fd4ca3e5c58fdd681e2f0ceddf0"
@@ -5882,6 +5887,11 @@ react-native-maps@0.27.1:
   version "0.27.1"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.27.1.tgz#2f10cd417bb2fd938c9e015b1c9b6d9b1a44b97f"
   integrity sha512-HygBkZBecTnIVRYrSiLRAvu4OmXOYso/A7c6Cy73HkOh9CgGV8Ap5eBea24tvmFGptjj5Hg8AJ94/YbmWK1Okw==
+
+react-native-permissions@^3.0.0-beta.2:
+  version "3.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-3.0.0-beta.2.tgz#b315c018dade7694f7f3ef9880d7ffcbc3a58ff7"
+  integrity sha512-O2hP2vqarT1QHQq0pcXEevHtbOQ92nAqqTYFuEkgGNb2u6wYAOLNhhuuPb7DKqk1pXdUeU9Ihd2LGn82jFqOWg==
 
 react-native-reanimated@^1.13.2:
   version "1.13.2"
