@@ -97,11 +97,11 @@ export default function GoogleMap({side}) {
           )}
         </MapView> */}
       <MapView
-        showsUserLocation
+        showsUserLocation={true}
         showsCompass
         initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
+          latitude: 33.8745141,
+          longitude: -84.63975789999999,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}

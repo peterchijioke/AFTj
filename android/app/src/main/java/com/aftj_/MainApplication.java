@@ -21,14 +21,13 @@ public class MainApplication extends Application implements ReactApplication {
           return BuildConfig.DEBUG;
         }
 
-
-
         @Override
         protected List<ReactPackage> getPackages() {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
+          // packages.add(new MapsPackage());
           return packages;
         }
 
@@ -49,14 +48,7 @@ public class MainApplication extends Application implements ReactApplication {
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
-  // map package
- @Override
-    protected List<ReactPackage> getPackages() {
-        return Arrays.<ReactPackage>asList(
-                new MainReactPackage(),
-                new MapsPackage()
-        );
-    }
+
   /**
    * Loads Flipper in React Native templates. Call this in the onCreate method with something like
    * initializeFlipper(this, getReactNativeHost().getReactInstanceManager());

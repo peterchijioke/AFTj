@@ -184,21 +184,6 @@ android {
     }
 }
 
-
-// ====================================
-// buildscript {
-//     ext {
-//         buildToolsVersion = "xxx"
-//         minSdkVersion = xxx
-//         compileSdkVersion = xxx
-//         targetSdkVersion = xxx
-//         supportLibVersion = "xxx"
-//         playServicesVersion = "17.0.0" // or find latest version
-//         androidMapsUtilsVersion = "xxx"
-//     }
-// }
-// =================================
-
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
