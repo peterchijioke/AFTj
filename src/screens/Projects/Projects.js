@@ -118,6 +118,9 @@ const CancelToken = axios.CancelToken;
 const source = CancelToken.source();
 import axios from 'axios';
 export default class Projects extends Component {
+  state = {
+    project: [],
+  };
   componentWillUnmount() {
     source.cancel();
   }
@@ -134,7 +137,8 @@ export default class Projects extends Component {
         },
       );
 
-      console.log(resp.data);
+      console.log(resp.data.data);
+      this.setState({project: resp.data.data});
     } catch (eaftj) {
       console.log(e.response.data);
     }
@@ -178,7 +182,7 @@ export default class Projects extends Component {
         </View>
         <View style={styles.line}></View>
         <ScrollView>
-          {data.map((item) => {
+          {this.state.project.map((item) => {
             return (
               <View key={item.id}>
                 <View style={styles.contain}>
@@ -186,10 +190,10 @@ export default class Projects extends Component {
                     <Text style={styles.inTXT}>{item.name}</Text>
                   </View>
                   <View style={{marginHorizontal: 30}}>
-                    <Text style={styles.inTXT}>{item.sdate}</Text>
+                    <Text style={styles.inTXT}>{item.star_date}</Text>
                   </View>
                   <View>
-                    <Text style={styles.inTXT}>{item.edate}</Text>
+                    <Text style={styles.inTXT}>{item.end_date}</Text>
                   </View>
                   <View style={{marginHorizontal: 30}}>
                     <Text style={styles.inTXT}>{item.cost}</Text>
