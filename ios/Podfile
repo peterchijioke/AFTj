@@ -10,6 +10,10 @@ target 'AFTj_' do
 
   pod 'react-native-maps', :path => '../node_modules/react-native-maps'
 
+  pod 'RNReverseGeocode', :path => '../node_modules/@kiwicom/react-native-reverse-geocode'
+
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-async-storage/async-storage'
+
   target 'AFTj_Tests' do
     inherit! :complete
     # Pods for testing

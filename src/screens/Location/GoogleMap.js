@@ -11,12 +11,14 @@ import {
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import CurrentLocationButton from './CurrentLocationButton';
+import RNReverseGeocode from '@kiwicom/react-native-reverse-geocode';
 
 const {height, width} = Dimensions.get('window');
 
 export default function GoogleMap({side}) {
   const [GrantedPermission, setGrantedPermission] = useState(false);
   const [cord, setCord] = useState();
+  const [addy, setAddy] = useState();
   useEffect(() => {
     const requestLocationPermission = async () => {
       try {
@@ -38,6 +40,29 @@ export default function GoogleMap({side}) {
         alert('err', err);
       }
     };
+
+    const RNRgeo = async () => {
+      try {
+        const region = {
+          latitude: 33.874620973209886,
+          longitude: -84.63951113948264,
+
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
+        };
+
+        const searchText = 'JCCI GLORY TABERNACLE';
+
+        RNReverseGeocode.searchForLocations(searchText, region, (err, res) => {
+          console.log(addy);
+          setAddy(res[0].address);
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    RNRgeo();
     requestLocationPermission();
   }, [GrantedPermission]);
 
@@ -53,7 +78,7 @@ export default function GoogleMap({side}) {
           latitudeDelta: 0.045,
         };
         setCord(dataCord);
-        console.log(cord);
+        // console.log(cord);
       },
       (error) => {
         console.log(error.message);
