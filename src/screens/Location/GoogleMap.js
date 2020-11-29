@@ -12,13 +12,14 @@ import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import CurrentLocationButton from './CurrentLocationButton';
 import RNReverseGeocode from '@kiwicom/react-native-reverse-geocode';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const {height, width} = Dimensions.get('window');
 
 export default function GoogleMap({side}) {
   const [GrantedPermission, setGrantedPermission] = useState(false);
   const [cord, setCord] = useState();
-  const [addy, setAddy] = useState();
+
   useEffect(() => {
     const requestLocationPermission = async () => {
       try {
@@ -46,7 +47,6 @@ export default function GoogleMap({side}) {
         const region = {
           latitude: 33.874620973209886,
           longitude: -84.63951113948264,
-
           latitudeDelta: 0.01,
           longitudeDelta: 0.01,
         };
@@ -54,8 +54,7 @@ export default function GoogleMap({side}) {
         const searchText = 'JCCI GLORY TABERNACLE';
 
         RNReverseGeocode.searchForLocations(searchText, region, (err, res) => {
-          console.log(addy);
-          setAddy(res[0].address);
+          storeAddress(res[0].address);
         });
       } catch (error) {
         console.log(error.message);
@@ -66,16 +65,31 @@ export default function GoogleMap({side}) {
     requestLocationPermission();
   }, [GrantedPermission]);
 
+  const storeAddress = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem('address', jsonValue);
+    } catch (e) {
+      // saving error
+      console.log(e.message);
+    }
+  };
+
   const getOneTimeLocation = () => {
     Geolocation.getCurrentPosition(
       (position) => {
         const currentLongitude = JSON.stringify(position.coords.longitude);
         const currentLatitude = JSON.stringify(position.coords.latitude);
         const dataCord = {
-          longitude: JSON.parse(currentLongitude),
-          latitude: JSON.parse(currentLatitude),
-          longitudeDelta: 0.045,
-          latitudeDelta: 0.045,
+          // longitude: JSON.parse(currentLongitude),
+          // latitude: JSON.parse(currentLatitude),
+          // longitudeDelta: 0.045,
+          // latitudeDelta: 0.045,
+
+          latitude: 33.874620973209886,
+          longitude: -84.63951113948264,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
         };
         setCord(dataCord);
         // console.log(cord);
@@ -97,6 +111,8 @@ export default function GoogleMap({side}) {
       <MapView
         initialRegion={cord}
         zoomControlEnabled
+        showsBuildings
+        showsTraffic
         provider={PROVIDER_GOOGLE}
         style={styles.maping}>
         <Marker

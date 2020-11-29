@@ -11,8 +11,24 @@ import {
 import {Content} from 'native-base';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 const {width, height} = Dimensions.get('window');
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class SideLocation extends Component {
+  state = {address: ''};
+  componentDidMount = () => {
+    this.getData();
+  };
+  getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('address');
+      return jsonValue != null
+        ? this.setState({address: JSON.parse(jsonValue)})
+        : null;
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
   render() {
     return (
       <View style={{flex: 1, backgroundColor: '#fff'}}>
@@ -33,7 +49,7 @@ export default class SideLocation extends Component {
             5000 mi
           </Text>
           <Text style={{marginBottom: 10, fontSize: 18, marginTop: 5}}>
-            3000 Macedonia Road, Power Springs G.A USA.
+            {this.state.address}
           </Text>
         </View>
 
