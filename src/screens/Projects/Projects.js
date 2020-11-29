@@ -10,8 +10,8 @@ import {
 
 import {Container, Header, Left, Body, Right, Button, Title} from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Feather from 'react-native-vector-icons/Feather';
-// import { SafeAreaView } from "react-native-safe-area-context";
+import RNHTMLtoPDF from 'react-native-html-to-pdf';
+import RNPrint from 'react-native-print';
 
 const {width, height} = Dimensions.get('window');
 const data = [
