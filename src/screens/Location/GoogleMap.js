@@ -24,7 +24,7 @@ export default function GoogleMap({side}) {
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
           {
             title: 'Location Access Required',
-            message: 'This App needs to Access your location',
+            message: 'AFTj needs to Access your location',
           },
         );
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
@@ -47,8 +47,10 @@ export default function GoogleMap({side}) {
         const currentLongitude = JSON.stringify(position.coords.longitude);
         const currentLatitude = JSON.stringify(position.coords.latitude);
         const dataCord = {
-          longitude: currentLongitude,
-          latitude: currentLatitude,
+          longitude: JSON.parse(currentLongitude),
+          latitude: JSON.parse(currentLatitude),
+          longitudeDelta: 0.045,
+          latitudeDelta: 0.045,
         };
         setCord(dataCord);
         console.log(cord);
@@ -67,48 +69,20 @@ export default function GoogleMap({side}) {
   return (
     <View style={styles.mapView}>
       <CurrentLocationButton open={side} />
-      {/* <MapView
-          // showsUserLocation
-          initialRegion={this.state.region}
-          // showsMyLocationButton
-          // initialRegion={{
-          // latitude: 38.945647676897536,
-          // longitude: -76.93186930015136,
-          //   latitudeDelta: 0.0922,
-          //   longitudeDelta: 0.0421,
-          // }}
-          provider={PROVIDER_GOOGLE}
-          customMapStyle={styles.maping}>
-          {this.state.dataCord != '' ? (
-            <Marker
-              coordinate={this.state.dataCord}
-              title={'title'}
-              description={'description'}
-            />
-          ) : (
-            <Marker
-              coordinate={{
-                latitude: 33.8745141,
-                longitude: -84.63975789999999,
-              }}
-              title={'title'}
-              description={'description'}
-            />
-          )}
-        </MapView> */}
       <MapView
-        showsUserLocation={true}
-        showsCompass
-        initialRegion={{
-          latitude: 33.8745141,
-          longitude: -84.63975789999999,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
+        initialRegion={cord}
+        zoomControlEnabled
         provider={PROVIDER_GOOGLE}
-        zoomEnabled
-        style={styles.maping}
-      />
+        style={styles.maping}>
+        <Marker
+          coordinate={{
+            latitude: 33.8745141,
+            longitude: -84.63975789999999,
+          }}
+          title={'JCCI GLORY TABERNACLE'}
+          // description={'You are welcom'}
+        />
+      </MapView>
     </View>
   );
 }

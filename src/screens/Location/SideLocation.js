@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import {Content} from 'native-base';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-// import AsyncStorage from "@react-native-community/async-storage";
 const {width, height} = Dimensions.get('window');
 
 export default class SideLocation extends Component {
