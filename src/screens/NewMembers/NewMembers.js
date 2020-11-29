@@ -44,15 +44,16 @@ export default class NewMembers extends Component {
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       );
 
-      if (!testName.test(this.state.name.trim())) {
-        ToastAndroid.showWithGravityAndOffset(
-          'Name must be letters only',
-          ToastAndroid.LONG,
-          ToastAndroid.BOTTOM,
-          25,
-          50,
-        );
-      } else if (!testMail.test(this.state.email.trim())) {
+      // if (!testName.test(this.state.name.trim())) {
+      //   ToastAndroid.showWithGravityAndOffset(
+      //     'Name must be letters only',
+      //     ToastAndroid.LONG,
+      //     ToastAndroid.BOTTOM,
+      //     25,
+      //     50,
+      //   );
+      // } else
+      if (!testMail.test(this.state.email.trim())) {
         ToastAndroid.showWithGravityAndOffset(
           'Invalid email, try again',
           ToastAndroid.SHORT,
@@ -63,10 +64,12 @@ export default class NewMembers extends Component {
       } else {
         try {
           const data = {
-            name: this.state.name.trim(),
             email: this.state.email.trim(),
+            name: this.state.name.trim(),
             phone: this.state.phone.trim(),
           };
+          // const DD = JSON.stringify(data);
+          // console.log(DD);
           const resp = await axios.post(
             'https://church.aftjdigital.com/api/new-member',
             data,
@@ -75,7 +78,7 @@ export default class NewMembers extends Component {
             },
           );
 
-          console.log(resp);
+          console.log(resp.message);
           ToastAndroid.showWithGravityAndOffset(
             'Welcome, your data was added successfully',
             ToastAndroid.SHORT,
