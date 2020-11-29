@@ -79,14 +79,7 @@ export default class NewMembers extends Component {
           );
 
           console.log(resp.data.message);
-
-          // ToastAndroid.showWithGravityAndOffset(
-          //   'Welcome, your data was added successfully',
-          //   ToastAndroid.SHORT,
-          //   ToastAndroid.CENTER,
-          //   25,
-          //   50,
-          // );
+          alert(resp.data.message);
         } catch (error) {
           console.log(e.response.data);
         }
