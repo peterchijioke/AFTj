@@ -78,16 +78,17 @@ export default class NewMembers extends Component {
             },
           );
 
-          console.log(resp.message);
-          ToastAndroid.showWithGravityAndOffset(
-            'Welcome, your data was added successfully',
-            ToastAndroid.SHORT,
-            ToastAndroid.CENTER,
-            25,
-            50,
-          );
+          console.log(resp.data.message);
+
+          // ToastAndroid.showWithGravityAndOffset(
+          //   'Welcome, your data was added successfully',
+          //   ToastAndroid.SHORT,
+          //   ToastAndroid.CENTER,
+          //   25,
+          //   50,
+          // );
         } catch (error) {
-          console.log(error.message);
+          console.log(e.response.data);
         }
       }
     }
