@@ -11,29 +11,85 @@ import {
   KeyboardAvoidingView,
   Platform,
   TextInput,
+  ToastAndroid,
 } from 'react-native';
 
-import {
-  Container,
-  Header,
-  Left,
-  Body,
-  Right,
-  Button,
-  Title,
-  Content,
-  List,
-  ListItem,
-  Thumbnail,
-} from 'native-base';
+import {Container, Header, Left, Body, Right, Button, Title} from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-// import { TextInput } from "react-native-gesture-handler";
-// import { SafeAreaView } from "react-native-safe-area-context";
 
 const {width, height} = Dimensions.get('window');
+const CancelToken = axios.CancelToken;
+const source = CancelToken.source();
+import axios from 'axios';
 
 export default class NewMembers extends Component {
   state = {name: '', email: '', phone: ''};
+
+  sentDataToDb = async () => {
+    if (
+      this.state.phone === '' ||
+      this.state.email === '' ||
+      this.state.name === ''
+    ) {
+      ToastAndroid.showWithGravityAndOffset(
+        'Please do not leave any input field empty',
+        ToastAndroid.LONG,
+        ToastAndroid.BOTTOM,
+        25,
+        50,
+      );
+    } else {
+      let testName = new RegExp(/^[0-9a-zA-Z]+$/);
+      let testMail = new RegExp(
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+      );
+
+      if (!testName.test(this.state.name.trim())) {
+        ToastAndroid.showWithGravityAndOffset(
+          'Name must be letters only',
+          ToastAndroid.LONG,
+          ToastAndroid.BOTTOM,
+          25,
+          50,
+        );
+      } else if (!testMail.test(this.state.email.trim())) {
+        ToastAndroid.showWithGravityAndOffset(
+          'Invalid email, try again',
+          ToastAndroid.SHORT,
+          ToastAndroid.BOTTOM,
+          25,
+          50,
+        );
+      } else {
+        try {
+          const data = {
+            name: this.state.name.trim(),
+            email: this.state.email.trim(),
+            phone: this.state.phone.trim(),
+          };
+          const resp = await axios.post(
+            'https://church.aftjdigital.com/api/new-member',
+            data,
+            {
+              cancelToken: source.token,
+            },
+          );
+
+          console.log(resp);
+          ToastAndroid.showWithGravityAndOffset(
+            'Welcome, your data was added successfully',
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER,
+            25,
+            50,
+          );
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
+    }
+  };
+
   render() {
     return (
       <Container>
@@ -77,6 +133,7 @@ export default class NewMembers extends Component {
               <View>
                 <Text style={{marginBottom: 12}}>Full Name</Text>
                 <TextInput
+                  keyboardType="default"
                   onChangeText={(text) => {
                     console.log(text);
                     this.setState({name: text});
@@ -93,6 +150,7 @@ export default class NewMembers extends Component {
               <View style={{marginTop: 20}}>
                 <Text style={{marginBottom: 12}}>Email Address</Text>
                 <TextInput
+                  keyboardType="email-address"
                   onChangeText={(text) => {
                     console.log(text);
                     this.setState({email: text});
@@ -109,6 +167,7 @@ export default class NewMembers extends Component {
               <View style={{marginTop: 20}}>
                 <Text style={{marginBottom: 12}}>Contact Number</Text>
                 <TextInput
+                  keyboardType="number-pad"
                   onChangeText={(text) => {
                     console.log(text);
                     this.setState({phone: text});
@@ -122,11 +181,7 @@ export default class NewMembers extends Component {
                   placeholder="Enter Your Phone Number"
                 />
               </View>
-              <Pressable
-                onPress={() => {
-                  console.log('pressed done');
-                }}
-                style={styles.Pressable}>
+              <Pressable onPress={this.sentDataToDb} style={styles.Pressable}>
                 <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 18}}>
                   Done
                 </Text>

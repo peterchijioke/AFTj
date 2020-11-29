@@ -114,8 +114,31 @@ const data = [
     id: 14,
   },
 ];
-
+const CancelToken = axios.CancelToken;
+const source = CancelToken.source();
+import axios from 'axios';
 export default class Projects extends Component {
+  componentWillUnmount() {
+    source.cancel();
+  }
+  componentDidMount() {
+    this.getProjects();
+  }
+
+  getProjects = async () => {
+    try {
+      const resp = await axios.get(
+        'https://church.aftjdigital.com/api/church-projects',
+        {
+          cancelToken: source.token,
+        },
+      );
+
+      console.log(resp);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   render() {
     const {navigation} = this.props;
     return (

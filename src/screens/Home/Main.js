@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import {
+  Pressable,
   StyleSheet,
   View,
   Dimensions,
@@ -46,11 +47,41 @@ export default class Main extends Component {
   };
   render() {
     const data = [
-      {req: require('../../img/jv.jpg'), id: 1, intext: 'Jesus loves you'},
-      {req: require('../../img/img3.jpg'), id: 2, intext: 'Jesus loves you'},
-      {req: require('../../img/img.jpg'), id: 3, intext: 'Jesus loves you'},
-      {req: require('../../img/img1.jpg'), id: 4, intext: 'Jesus loves you'},
-      {req: require('../../img/img4.jpg'), id: 5, intext: 'Jesus loves you'},
+      {
+        req: require('../../img/jv.jpg'),
+        id: 1,
+        intext: 'Jesus loves you',
+        bibleText: 'In the beginning God created the heaven and the earth',
+        bibleVer: 'Gen 1:3',
+      },
+      {
+        req: require('../../img/img3.jpg'),
+        id: 2,
+        intext: 'Jesus loves you',
+        bibleText: 'In the beginning God created the heaven and the earth',
+        bibleVer: 'Gen 1:3',
+      },
+      {
+        req: require('../../img/img.jpg'),
+        id: 3,
+        intext: 'Jesus loves you',
+        bibleText: 'In the beginning God created the heaven and the earth',
+        bibleVer: 'Gen 1:3',
+      },
+      {
+        req: require('../../img/img1.jpg'),
+        id: 4,
+        intext: 'Jesus loves you',
+        bibleText: 'In the beginning God created the heaven and the earth',
+        bibleVer: 'Gen 1:3',
+      },
+      {
+        req: require('../../img/img4.jpg'),
+        id: 5,
+        intext: 'Jesus loves you',
+        bibleText: 'In the beginning God created the heaven and the earth',
+        bibleVer: 'Gen 1:3',
+      },
     ];
     return (
       <Drawer
@@ -60,24 +91,19 @@ export default class Main extends Component {
         content={<Side navigation={this.props.navigation} />}
         onClose={() => this.closeDrawer()}>
         <StatusBar
+          backgroundColor="#000"
           barStyle={
             Platform.OS === 'android' ? 'light-content' : 'dark-content'
           }
         />
-        {/* <StatusBar barStyle="light-content" /> */}
         <SafeAreaView style={styles.container}>
-          {/* {this.state.btnTopRight === false ? ( */}
-          <Button onPress={this.onOpenD} transparent style={styles.icon}>
+          <Pressable onPress={this.openDrawer} style={styles.icon}>
             <MaterialIcons name="menu" color="#ccc" size={30} />
-          </Button>
+          </Pressable>
+
           <Button transparent style={[styles.icon, {left: 310}]}>
             <MaterialIcons name="search" color="#ccc" size={30} />
           </Button>
-          {/* ) : ( */}
-          {/* <Button onPress={this.onClose} transparent style={styles.icon}>
-              <MaterialCommunityIcons name="menu-open" color="#ccc" size={30} />
-            </Button> */}
-          {/* )} */}
 
           <SwiperFlatList
             // autoplay
@@ -89,9 +115,25 @@ export default class Main extends Component {
             paginationStyle={{marginBottom: 160}}>
             {data.map((item) => {
               return (
-                <View key={item.id}>
+                <View
+                  key={item.id}
+                  style={{width: width, backgroundColor: '#000'}}>
                   <Image source={item.req} style={[styles.child]} />
-                  <Text style={styles.innerText}>{item.intext}</Text>
+                  <Text
+                    style={[
+                      styles.innerText,
+                      {fontWeight: 'bold', fontSize: 18, left: 120},
+                    ]}>
+                    {item.intext}
+                  </Text>
+                  {/* <View style={{}}>
+                    <Text style={[styles.innerText, {marginTop: 25, left: 30}]}>
+                      {item.bibleText}
+                    </Text>
+                  </View>
+                  <Text style={[styles.innerText, {marginTop: 50, left: 100}]}>
+                    {item.intext}
+                  </Text> */}
                 </View>
               );
             })}
@@ -133,7 +175,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 260,
     textAlign: 'center',
-    left: 78,
+
     zIndex: 2,
   },
 });
