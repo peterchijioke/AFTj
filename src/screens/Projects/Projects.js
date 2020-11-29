@@ -134,9 +134,9 @@ export default class Projects extends Component {
         },
       );
 
-      console.log(resp);
-    } catch (error) {
-      console.log(error.message);
+      console.log(resp.data);
+    } catch (eaftj) {
+      console.log(e.response.data);
     }
   };
   render() {

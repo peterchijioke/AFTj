@@ -80,7 +80,7 @@ export default class NewMembers extends Component {
 
           console.log(resp.data.message);
           alert(resp.data.message);
-        } catch (error) {
+        } catch (e) {
           console.log(e.response.data);
         }
       }
