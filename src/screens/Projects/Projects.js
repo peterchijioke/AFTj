@@ -177,7 +177,7 @@ export default class Projects extends Component {
             <Text style={styles.txt}>End Date</Text>
           </View>
           <View style={{marginHorizontal: 35}}>
-            <Text style={[styles.txt, {marginRight: 8}]}>Cost</Text>
+            <Text style={[styles.txt, {marginRight: 8}]}>Cost($)</Text>
           </View>
         </View>
         <View style={styles.line}></View>
