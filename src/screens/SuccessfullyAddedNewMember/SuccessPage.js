@@ -74,6 +74,7 @@ const SuccessPage = () => {
           </Text>
         </View>
         <Pressable
+          onPress={() => console.log('Continue btn was pressed.')}
           style={{
             marginTop: 35,
             alignSelf: 'center',
