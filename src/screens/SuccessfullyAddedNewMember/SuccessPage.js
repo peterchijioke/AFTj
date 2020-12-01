@@ -15,7 +15,7 @@ const SuccessPage = ({navigation}) => {
     <Container>
       <Header androidStatusBarColor="#000" style={{backgroundColor: '#fff'}}>
         <Left>
-          <Button onPress={()=>navigation.goBack()} transparent>
+          <Button onPress={() => navigation.goBack()} transparent>
             <AntDesign name="arrowleft" color="#000" size={20} />
           </Button>
         </Left>
@@ -36,7 +36,6 @@ const SuccessPage = ({navigation}) => {
           style={{
             width: width / 2 + 70,
             alignSelf: 'center',
-            
           }}>
           <Text
             style={{
@@ -73,7 +72,9 @@ const SuccessPage = ({navigation}) => {
           </Text>
         </View>
         <Pressable
-          onPress={() => console.log('Continue to new member resource btn was pressed.')}
+          onPress={() =>
+            console.log('Continue to new member resource btn was pressed.')
+          }
           style={{
             marginTop: 35,
             alignSelf: 'center',

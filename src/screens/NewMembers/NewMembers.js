@@ -144,7 +144,6 @@ export default class NewMembers extends Component {
               <TextInput
                 keyboardType="default"
                 onChangeText={(text) => {
-                  console.log(text);
                   this.setState({name: text});
                 }}
                 value={this.state.name}
@@ -163,7 +162,6 @@ export default class NewMembers extends Component {
                 keyboardType="email-address"
                 multiline
                 onChangeText={(text) => {
-                  console.log(text);
                   this.setState({email: text});
                 }}
                 value={this.state.email}
@@ -181,7 +179,6 @@ export default class NewMembers extends Component {
               <TextInput
                 keyboardType="number-pad"
                 onChangeText={(text) => {
-                  console.log(text);
                   this.setState({phone: text});
                 }}
                 value={this.state.phone}
@@ -199,7 +196,6 @@ export default class NewMembers extends Component {
               <TextInput
                 keyboardType="default"
                 onChangeText={(text) => {
-                  console.log(text);
                   this.setState({home: text});
                 }}
                 value={this.state.home}
@@ -272,7 +268,6 @@ export default class NewMembers extends Component {
               <TextInput
                 keyboardType="default"
                 onChangeText={(text) => {
-                  console.log(text);
                   this.setState({prayerRequest: text});
                 }}
                 value={this.state.prayerRequest}
