@@ -10,13 +10,13 @@ import {
 import {Container, Header, Left, Body, Right, Button, Title} from 'native-base';
 const {width, height} = Dimensions.get('window');
 
-const SuccessPage = () => {
+const SuccessPage = ({navigation}) => {
   return (
     <Container>
       <Header androidStatusBarColor="#000" style={{backgroundColor: '#fff'}}>
         <Left>
-          <Button transparent>
-            {/* <AntDesign name="arrowleft" color="#000" size={20} /> */}
+          <Button onPress={()=>navigation.goBack()} transparent>
+            <AntDesign name="arrowleft" color="#000" size={20} />
           </Button>
         </Left>
         <Body>
@@ -36,8 +36,7 @@ const SuccessPage = () => {
           style={{
             width: width / 2 + 70,
             alignSelf: 'center',
-            // justifyContent: 'center',
-            // backgroundColor: '#133',
+            
           }}>
           <Text
             style={{
@@ -74,7 +73,7 @@ const SuccessPage = () => {
           </Text>
         </View>
         <Pressable
-          onPress={() => console.log('Continue btn was pressed.')}
+          onPress={() => console.log('Continue to new member resource btn was pressed.')}
           style={{
             marginTop: 35,
             alignSelf: 'center',
