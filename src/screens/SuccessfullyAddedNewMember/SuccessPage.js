@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {Container, Header, Left, Body, Right, Button, Title} from 'native-base';
 const {width, height} = Dimensions.get('window');
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const SuccessPage = ({navigation}) => {
   return (

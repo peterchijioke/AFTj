@@ -9,6 +9,7 @@ import {
   Pressable,
   TextInput,
   ToastAndroid,
+  TouchableOpacity,
 } from 'react-native';
 
 import {Container, Header, Left, Body, Right, Button, Title} from 'native-base';
@@ -215,18 +216,28 @@ export default class NewMembers extends Component {
               </Text>
             </View>
             <View style={{width: width / 9}}>
-              <RadioButton
-                color="#000"
-                value="first"
-                status={this.state.checked === 'yes' ? 'checked' : 'unchecked'}
-                onPress={() => this.setState({checked: 'yes'})}
-              />
-              <RadioButton
-                color="#000"
-                value="first"
-                status={this.state.checked === 'no' ? 'checked' : 'unchecked'}
-                onPress={() => this.setState({checked: 'no'})}
-              />
+              <View style={{flexDirection: 'row'}}>
+                <Text style={{marginTop: 8, fontSize: 16}}>Yes</Text>
+                <RadioButton
+                  color="#000"
+                  value="first"
+                  status={
+                    this.state.checked === 'yes' ? 'checked' : 'unchecked'
+                  }
+                  onPress={() => this.setState({checked: 'yes'})}
+                />
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                <Text style={{marginTop: 8, fontSize: 16, marginRight: 4}}>
+                  No
+                </Text>
+                <RadioButton
+                  color="#000"
+                  value="first"
+                  status={this.state.checked === 'no' ? 'checked' : 'unchecked'}
+                  onPress={() => this.setState({checked: 'no'})}
+                />
+              </View>
             </View>
 
             <Picker
@@ -281,11 +292,13 @@ export default class NewMembers extends Component {
               />
             </View>
           </View>
-          <Pressable onPress={this.sentDataToDb} style={styles.Pressable}>
+          <TouchableOpacity
+            onPress={this.sentDataToDb}
+            style={styles.Pressable}>
             <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 18}}>
               Submit
             </Text>
-          </Pressable>
+          </TouchableOpacity>
         </ScrollView>
 
         {/* </KeyboardAvoidingView> */}
