@@ -16,10 +16,10 @@ export default class App extends Component {
     return (
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen name="newMembers" component={NewMembers} />
           <Stack.Screen name="success" component={SuccessPage} />
           {/* <Stack.Screen name="main" component={Main} /> */}
           {/* <Stack.Screen name="location" component={LocationPage} /> */}
-          <Stack.Screen name="newMembers" component={NewMembers} />
           <Stack.Screen name="projects" component={Projects} />
         </Stack.Navigator>
       </NavigationContainer>
