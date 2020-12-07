@@ -9,6 +9,8 @@ import LocationPage from './src/screens/Location/LocationPage';
 import Projects from './src/screens/Projects/Projects';
 import NewMembers from './src/screens/NewMembers/NewMembers';
 import SuccessPage from './src/screens/SuccessfullyAddedNewMember/SuccessPage';
+import Giving from './src/screens/giving/Giving';
+import EnterAmountPage from './src/screens/giving/EnterAmountPage';
 
 export default class App extends Component {
   render() {
@@ -16,6 +18,9 @@ export default class App extends Component {
     return (
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen name="giving" component={Giving} />
+          <Stack.Screen name="amount" component={EnterAmountPage} />
+
           <Stack.Screen name="newMembers" component={NewMembers} />
           <Stack.Screen name="success" component={SuccessPage} />
           {/* <Stack.Screen name="main" component={Main} /> */}
