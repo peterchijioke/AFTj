@@ -3,12 +3,12 @@ import {StyleSheet, Text, View, TextInput, Pressable} from 'react-native';
 import {Container, Header, Body, Title, Right, Left, Button} from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const EnterAmountPage = () => {
+const EnterAmountPage = ({navigation}) => {
   return (
     <Container>
       <Header androidStatusBarColor="#000" style={{backgroundColor: '#fff'}}>
         <Left>
-          <Button transparent onPress={() => this.props.navigation.goBack()}>
+          <Button transparent onPress={() => navigation.goBack()}>
             <AntDesign name="arrowleft" color="#000" size={20} />
           </Button>
         </Left>

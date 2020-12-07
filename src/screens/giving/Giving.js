@@ -50,22 +50,22 @@ export default class Giving extends Component {
         content={<Side navigation={this.props.navigation} />}
         onClose={() => this.closeDrawer()}>
         <Container>
+          <Header
+            androidStatusBarColor="#000"
+            style={{backgroundColor: '#fff'}}>
+            <Left>
+              <Button onPress={this.openDrawer} transparent>
+                <MaterialIcons name="menu" color="#000" size={30} />
+              </Button>
+            </Left>
+            <Body>
+              <Title style={{color: '#000'}}>Giving</Title>
+            </Body>
+            <Right>
+              <Button transparent></Button>
+            </Right>
+          </Header>
           <Content>
-            <Header
-              androidStatusBarColor="#000"
-              style={{backgroundColor: '#fff'}}>
-              <Left>
-                <Button onPress={this.openDrawer} transparent>
-                  <MaterialIcons name="menu" color="#000" size={30} />
-                </Button>
-              </Left>
-              <Body>
-                <Title style={{color: '#000'}}>Giving</Title>
-              </Body>
-              <Right>
-                <Button transparent></Button>
-              </Right>
-            </Header>
             <View style={{height}}>
               <View style={{margin: 18}}>
                 <Text style={{fontSize: 16, marginTop: 10}}>
